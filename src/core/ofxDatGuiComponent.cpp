@@ -410,11 +410,7 @@ void ofxDatGuiComponent::drawBackground()
 void ofxDatGuiComponent::drawLabel()
 {
     ofSetColor(mLabel.color);
-    if (mType != ofxDatGuiType::DROPDOWN_OPTION){
-        mFont->draw(mLabel.rendered, x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
-    }   else{
-        mFont->draw("* "+mLabel.rendered, x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
-    }
+    mFont->draw(mLabel.rendered, x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
 }
 
 void ofxDatGuiComponent::drawStripe()

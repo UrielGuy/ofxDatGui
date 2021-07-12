@@ -431,6 +431,10 @@ class ofxDatGuiDropdownOption : public ofxDatGuiButton {
         {
             ofxDatGuiButton::setTheme(theme);
             mStyle.stripe.color = theme->stripe.dropdown;
+            mStyle.height *= 0.75;
+            //mLabel.x += 200;
+            mLabel.alignment = ofxDatGuiAlignment::RIGHT;
+
         }
     
         void setWidth(int width, float labelWidth = 1)
@@ -483,7 +487,7 @@ class ofxDatGuiDropdown : public ofxDatGuiGroup {
             if (cIndex < 0 || cIndex >= children.size()){
                 ofLogError() << "ofxDatGuiDropdown->select("<<cIndex<<") is out of range";
             }   else{
-                setLabel(children[cIndex]->getLabel());
+                setLabel(mName + ": " + children[cIndex]->getLabel());
             }
         }
 
@@ -519,7 +523,7 @@ class ofxDatGuiDropdown : public ofxDatGuiGroup {
         void onOptionSelected(ofxDatGuiButtonEvent e)
         {
             for(int i=0; i<children.size(); i++) if (e.target == children[i]) mOption = i;
-            setLabel(children[mOption]->getLabel());
+            setLabel(mName + ": " + children[mOption]->getLabel());
            	collapse();
             dispatchEvent();
         }

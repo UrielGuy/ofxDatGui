@@ -45,9 +45,9 @@ class ofxDatGuiTheme{
             if (autoInitialize) init();
         }
     
-        void init()
+        void init(bool force_hires = false)
         {
-            if (ofxDatGuiIsHighResolution()){
+            if (force_hires || ofxDatGuiIsHighResolution()){
                 font.size *=2;
                 stripe.width *=2;
                 layout.width *=2;
