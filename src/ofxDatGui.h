@@ -75,8 +75,6 @@ class ofxDatGui : public ofxDatGuiInteractiveObject
         ofxDatGuiBreak* addBreak();
         ofxDatGui2dPad* add2dPad(string label);
         ofxDatGui2dPad* add2dPad(string label, ofRectangle bounds);
-        ofxDatGuiWaveMonitor* addWaveMonitor(string label, float min, float max);
-        ofxDatGuiValuePlotter* addValuePlotter(string label, float min, float max);
         ofxDatGuiColorPicker* addColorPicker(string label, ofColor color = ofColor::black);
         ofxDatGuiMatrix* addMatrix(string label, int numButtons, bool showLabels = false);
         ofxDatGuiFolder* addFolder(string label, ofColor color = ofColor::white);
@@ -92,8 +90,6 @@ class ofxDatGui : public ofxDatGuiInteractiveObject
         ofxDatGuiTextInput* getTextInput(string label, string folder = "");
         ofxDatGuiColorPicker* getColorPicker(string label, string folder = "");
         ofxDatGuiMatrix* getMatrix(string label, string folder = "");
-        ofxDatGuiWaveMonitor* getWaveMonitor(string label, string folder = "");
-        ofxDatGuiValuePlotter* getValuePlotter(string label, string folder = "");
         ofxDatGuiFolder* getFolder(string label);
         ofxDatGuiDropdown* getDropdown(string label);
     

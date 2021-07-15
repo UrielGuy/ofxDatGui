@@ -335,20 +335,6 @@ ofxDatGuiColorPicker* ofxDatGui::addColorPicker(string label, ofColor color)
     return picker;
 }
 
-ofxDatGuiWaveMonitor* ofxDatGui::addWaveMonitor(string label, float frequency, float amplitude)
-{
-    ofxDatGuiWaveMonitor* monitor = new ofxDatGuiWaveMonitor(label, frequency, amplitude);
-    attachItem(monitor);
-    return monitor;
-}
-
-ofxDatGuiValuePlotter* ofxDatGui::addValuePlotter(string label, float min, float max)
-{
-    ofxDatGuiValuePlotter* plotter = new ofxDatGuiValuePlotter(label, min, max);
-    attachItem(plotter);
-    return plotter;
-}
-
 ofxDatGuiDropdown* ofxDatGui::addDropdown(string label, vector<string> options)
 {
     ofxDatGuiDropdown* dropdown = new ofxDatGuiDropdown(label, options);
@@ -543,40 +529,6 @@ ofxDatGuiColorPicker* ofxDatGui::getColorPicker(string cl, string fl)
     }
     if (o==nullptr){
         o = ofxDatGuiColorPicker::getInstance();
-        ofxDatGuiLog::write(ofxDatGuiMsg::COMPONENT_NOT_FOUND, fl!="" ? fl+"-"+cl : cl);
-        trash.push_back(o);
-    }
-    return o;
-}
-
-ofxDatGuiWaveMonitor* ofxDatGui::getWaveMonitor(string cl, string fl)
-{
-    ofxDatGuiWaveMonitor* o = nullptr;
-    if (fl != ""){
-        ofxDatGuiFolder* f = static_cast<ofxDatGuiFolder*>(getComponent(ofxDatGuiType::FOLDER, fl));
-        if (f) o = static_cast<ofxDatGuiWaveMonitor*>(f->getComponent(ofxDatGuiType::WAVE_MONITOR, cl));
-    }   else{
-        o = static_cast<ofxDatGuiWaveMonitor*>(getComponent(ofxDatGuiType::WAVE_MONITOR, cl));
-    }
-    if (o==nullptr){
-        o = ofxDatGuiWaveMonitor::getInstance();
-        ofxDatGuiLog::write(ofxDatGuiMsg::COMPONENT_NOT_FOUND, fl!="" ? fl+"-"+cl : cl);
-        trash.push_back(o);
-    }
-    return o;
-}
-
-ofxDatGuiValuePlotter* ofxDatGui::getValuePlotter(string cl, string fl)
-{
-    ofxDatGuiValuePlotter* o = nullptr;
-    if (fl != ""){
-        ofxDatGuiFolder* f = static_cast<ofxDatGuiFolder*>(getComponent(ofxDatGuiType::FOLDER, fl));
-        if (f) o = static_cast<ofxDatGuiValuePlotter*>(f->getComponent(ofxDatGuiType::VALUE_PLOTTER, cl));
-    }   else{
-        o = static_cast<ofxDatGuiValuePlotter*>(getComponent(ofxDatGuiType::VALUE_PLOTTER, cl));
-    }
-    if (o==nullptr){
-        o = ofxDatGuiValuePlotter::getInstance();
         ofxDatGuiLog::write(ofxDatGuiMsg::COMPONENT_NOT_FOUND, fl!="" ? fl+"-"+cl : cl);
         trash.push_back(o);
     }

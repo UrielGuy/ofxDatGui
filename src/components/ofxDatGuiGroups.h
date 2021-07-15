@@ -29,7 +29,6 @@
 #include "ofxDatGui2dPad.h"
 #include "ofxDatGuiColorPicker.h"
 #include "ofxDatGuiMatrix.h"
-#include "ofxDatGuiTimeGraph.h"
 #include "ofxDatGuiScrollView.h"
 
 class ofxDatGuiGroup : public ofxDatGuiButton {
@@ -374,22 +373,6 @@ class ofxDatGuiFolder : public ofxDatGuiGroup {
             matrix->onMatrixEvent(this, &ofxDatGuiFolder::dispatchMatrixEvent);
             attachItem(matrix);
             return matrix;
-        }
-    
-        ofxDatGuiWaveMonitor* addWaveMonitor(string label, float frequency, float amplitude)
-        {
-            ofxDatGuiWaveMonitor* monitor = new ofxDatGuiWaveMonitor(label, frequency, amplitude);
-            monitor->setStripeColor(mStyle.stripe.color);
-            attachItem(monitor);
-            return monitor;
-        }
-    
-        ofxDatGuiValuePlotter* addValuePlotter(string label, float min, float max)
-        {
-            ofxDatGuiValuePlotter* plotter = new ofxDatGuiValuePlotter(label, min, max);
-            plotter->setStripeColor(mStyle.stripe.color);
-            attachItem(plotter);
-            return plotter;
         }
     
         void attachItem(ofxDatGuiComponent* item)
