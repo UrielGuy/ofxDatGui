@@ -407,10 +407,43 @@ void ofxDatGuiComponent::drawBackground()
     ofDrawRectangle(x, y, mStyle.width, mStyle.height);
 }
 
+bool is_zep_color_graph(const std::string& str) {
+    if (str.empty())  return false;
+    for (char c : str) {
+        switch (c) {
+        case '_':
+        case '-':
+        case '\\':
+        case '/':
+            break;
+        default:
+            return false;
+        }
+    }
+    return true;
+}
 void ofxDatGuiComponent::drawLabel()
 {
     ofSetColor(mLabel.color);
-    mFont->draw(mLabel.rendered, x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
+    if (!is_zep_color_graph(mLabel.rendered)) {
+        mFont->draw(mLabel.rendered, x + mLabel.x, y + mStyle.height / 2 + mLabel.rect.height / 2);
+    }
+    else {
+        ofPushStyle();
+        auto high = y + mStyle.height * 0.2;
+        auto low = y + mStyle.height * 0.8;
+        auto width = 0.7 * (low - high);
+        ofSetLineWidth(width / 6);
+        float cur_x = x + mLabel.x;
+        for (char c : mLabel.rendered) {
+            float cur_y = (c == '_' || c == '/') ? low : high;
+            float next_y = (c == '_' || c == '\\') ? low : high;
+            ofDrawLine(cur_x, cur_y, cur_x + width, next_y);
+            cur_x += width;
+            cur_y = next_y;
+        }
+        ofPopStyle();
+    }
 }
 
 void ofxDatGuiComponent::drawStripe()
