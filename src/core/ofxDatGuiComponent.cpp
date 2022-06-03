@@ -432,9 +432,9 @@ void ofxDatGuiComponent::drawLabel()
         ofPushStyle();
         auto high = y + mStyle.height * 0.2;
         auto low = y + mStyle.height * 0.8;
-        auto width = 0.7 * (low - high);
-        ofSetLineWidth(width / 6);
-        float cur_x = x + mLabel.x;
+        auto width = ceil(0.7 * (low - high));
+        ofSetLineWidth(width / 4);
+        float cur_x = x + mLabel.width - width * mLabel.rendered.length() - width * 2;
         for (char c : mLabel.rendered) {
             float cur_y = (c == '_' || c == '/') ? low : high;
             float next_y = (c == '_' || c == '\\') ? low : high;
