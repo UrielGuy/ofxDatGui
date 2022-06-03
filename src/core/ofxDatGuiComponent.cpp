@@ -425,17 +425,36 @@ bool is_zep_color_graph(const std::string& str) {
 void ofxDatGuiComponent::drawLabel()
 {
     ofSetColor(mLabel.color);
-    if (!is_zep_color_graph(mLabel.rendered)) {
-        mFont->draw(mLabel.rendered, x + mLabel.x, y + mStyle.height / 2 + mLabel.rect.height / 2);
+
+    int end_len = 0;
+    bool stop = false;
+    for (auto it = mLabel.rendered.rbegin(); !stop && it != mLabel.rendered.rend(); it++) {
+        switch (*it) {
+        case '_':
+        case '-':
+        case '\\':
+        case '/':
+            end_len++;
+            break;
+        default:
+            stop = true;
+            break;
+        }
     }
-    else {
+
+    std::string start = mLabel.rendered.substr(0, mLabel.rendered.length() - end_len);
+    std::string end = mLabel.rendered.substr(start.length());
+
+    mFont->draw(start, x + mLabel.x, y + mStyle.height / 2 + mLabel.rect.height / 2);
+
+    if (end != "") {
         ofPushStyle();
         auto high = y + mStyle.height * 0.2;
         auto low = y + mStyle.height * 0.8;
         auto width = ceil(0.7 * (low - high));
         ofSetLineWidth(width / 4);
-        float cur_x = x + mLabel.width - width * mLabel.rendered.length() - width * 2;
-        for (char c : mLabel.rendered) {
+        float cur_x = x + mLabel.width - width * end.length() - width * (start.empty() ?  2 : 4);
+        for (char c : end) {
             float cur_y = (c == '_' || c == '/') ? low : high;
             float next_y = (c == '_' || c == '\\') ? low : high;
             ofDrawLine(cur_x, cur_y, cur_x + width, next_y);
